@@ -1,28 +1,28 @@
 import functions as p
-from functions import move
 
 while True:
-    queens = input("")
+    # Get the number of queens from the user
+    queens = input("Input the number of queens: ")
     if queens.isdigit():
         queens = int(queens)
-        break
     else:
         print("Please enter a valid number of queens.")
+        continue
     
-first_row = [1 for i in range(queens)] 
-rest_of_matrix = [[0 for i in range(queens)] for i in range(queens - 1)]
-board = [first_row] + rest_of_matrix
-points = queens
-
-
-
-while True:
+    # Check if the number of queens is less than 4 
     if queens <= 3:
         print("There is no solution for a board with less than 4 queens.")  
-        break
+        continue
+    
+    # Start with an empty board and place one queen in each row.
+    board = [[0 for _ in range(queens)] for _ in range(queens)]
+
+    if p.move(queens, board):
+        for row in board:
+            print(" ".join(str(cell) for cell in row))
     else:
+        print("No solution found.")
+
         
-            
-print(board)    
 
 
