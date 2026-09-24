@@ -50,9 +50,9 @@ def printBoard(board):
 
     return False
 
-
 def fitness(board):
-    queens = len(board)
-    conflicts = 0
+    n = len(board)
+    max_conflicts = n * (n - 1) // 2
+    return max_conflicts - checkConflicts(board)
 
     
