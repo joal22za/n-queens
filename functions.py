@@ -67,7 +67,14 @@ def fitness(board):
     max_conflicts = n * (n - 1) // 2
     return max_conflicts - checkConflicts(board)
 
+def select_parent(boards):
+    a = random.choice(boards)
+    b = random.choice(boards)
+    
+    if(fitness(a) > fitness(b)):
+        return a
 
+    return b
 
 def crossover(parent1, parent2):
 
