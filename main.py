@@ -19,7 +19,7 @@ def fit(n, child_count = 10, mutation_prob = 0.1, generations = 100):
             new_boards.append(child)
             
         boards = new_boards
-        highest_score = []
+        highest_score = boards[0]
         for board in boards:
             if functions.fitness(board) > functions.fitness(highest_score):
                 highest_score = board
