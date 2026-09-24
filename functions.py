@@ -1,16 +1,35 @@
-def is_safe(board, row, col):
-    # A queen must not share a column with an earlier queen.
-    for previous_row in range(row):
-        if board[previous_row][col] == 1:
-            return False
+def checkConflicts(board): # count all conflicts in a board
+    n = len(board)
+    conflicts = 0
+    
+    # check duplicates numbers in board
+    #  2 3 4 2 2
 
-    # Only earlier rows need checking because later rows are still empty.
-    for previous_row in range(row):
-        column_difference = abs(col - next_column(board, previous_row))
-        if column_difference == row - previous_row:
-            return False
+    # "3": 1
+    # "2": 3
+    # "4": 1
 
-    return True
+    if len(board) != len(set(board)):
+        # check duplicate count
+        conflicts += (len(board) - len(set(board))) + 1
+
+    # check all diagonals
+    diag1 = set()  # row - col
+    diag2 = set()  # row + col
+
+    for row, col in enumerate(board):
+        if row - col in diag1:
+            conflicts += 1
+        else:
+            diag1.add(row - col)
+
+        if row + col in diag2:
+            conflicts += 1
+        else:
+            diag2.add(row + col)
+
+
+    return conflicts
 
 
 def next_column(board, row):
@@ -32,3 +51,10 @@ def move(queens, board, row=0):
             board[row][col] = 0
 
     return False
+
+
+def fitness(board):
+    queens = len(board)
+    conflicts = 0
+
+    
