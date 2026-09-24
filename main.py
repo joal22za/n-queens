@@ -22,7 +22,3 @@ while True:
             print(" ".join(str(cell) for cell in row))
     else:
         print("No solution found.")
-
-        
-
-

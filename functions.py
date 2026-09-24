@@ -45,17 +45,27 @@ def generateBoard(n):
     return [random.randint(0, n - 1) for _ in range(n)]
 
 def mutate(board):
-    
-    return False
+    child = list(board)
+    index = random.randint(0, len(board) - 1)
+    child[index] = random.randint(0, len(board) - 1)
+    return child
 
 def printBoard(board):
-
+    n = len(board)
+    for row in range(n):
+        line = ""
+        for col in range(n):
+            if board[row] == col:
+                line += "Q "
+            else:
+                line += ". "
+        print(line)
     return False
 
-
 def fitness(board):
-    queens = len(board)
-    conflicts = 0
+    n = len(board)
+    max_conflicts = n * (n - 1) // 2
+    return max_conflicts - checkConflicts(board)
 
 
 
