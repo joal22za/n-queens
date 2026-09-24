@@ -1,3 +1,5 @@
+import random 
+
 def checkConflicts(board): # count all conflicts in a board
     n = len(board)
     conflicts = 0
@@ -55,4 +57,14 @@ def fitness(board):
     queens = len(board)
     conflicts = 0
 
+
+
+def crossover(parent1, parent2):
+
+    n = len(parent1)
+    crossover_point = random.randint(1, n - 1)
     
+    child1 = parent1[:crossover_point] + parent2[crossover_point:]
+    child2 = parent2[:crossover_point] + parent1[crossover_point:]
+    
+    return child1, child2
