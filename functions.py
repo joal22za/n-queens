@@ -47,7 +47,15 @@ def mutate(board):
     return False
 
 def printBoard(board):
-
+    n = len(board)
+    for row in range(n):
+        line = ""
+        for col in range(n):
+            if board[row] == col:
+                line += "Q "
+            else:
+                line += ". "
+        print(line)
     return False
 
 def fitness(board):
