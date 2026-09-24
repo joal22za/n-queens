@@ -43,8 +43,10 @@ def generateBoard(n):
     return [random.randint(0, n - 1) for _ in range(n)]
 
 def mutate(board):
-    
-    return False
+    child = list(board)
+    index = random.randint(0, len(board) - 1)
+    child[index] = random.randint(0, len(board) - 1)
+    return child
 
 def printBoard(board):
     n = len(board)
