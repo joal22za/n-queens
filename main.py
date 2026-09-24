@@ -1,5 +1,6 @@
 import functions
 import random
+import time
 
 def fit(n, child_count = 10, mutation_prob = 0.1, generations = 100):
     boards = [functions.generateBoard(n) for _ in range(child_count)]
@@ -23,16 +24,20 @@ def fit(n, child_count = 10, mutation_prob = 0.1, generations = 100):
         for board in boards:
             if functions.fitness(board) > functions.fitness(highest_score):
                 highest_score = board
-        
-        print("Generation: ", i, "Fitness: ", functions.fitness(highest_score))
+        if i % 20 == 0:
+            print("Generation: ", i, "Fitness: ", functions.fitness(highest_score))
         
         if functions.fitness(highest_score) == max_fitness:
             functions.printBoard(highest_score)
-            print("Solution found!")
+            print("Solution found! in generation: ", i)
             break
             
     
     
-
+startTime = time.time()
 if __name__ == "__main__":
+
     fit(8, child_count=20, mutation_prob=0.1, generations=1000)
+    EndTime = time.time()
+
+    print("Time taken: ", EndTime - startTime, " seconds")
