@@ -36,4 +36,4 @@ def fit(n, child_count = 10, mutation_prob = 0.1, generations = 100):
     
 
 if __name__ == "__main__":
-    fit(8, child_count=20, mutation_prob=0.1, generations=100)
+    fit(8, child_count=20, mutation_prob=0.1, generations=1000)
