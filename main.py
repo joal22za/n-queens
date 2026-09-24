@@ -24,11 +24,10 @@ def fit(n, child_count = 10, mutation_prob = 0.1, generations = 100):
             if functions.fitness(board) > functions.fitness(highest_score):
                 highest_score = board
         
-        functions.printBoard(highest_score)
-        
         print("Generation: ", i, "Fitness: ", functions.fitness(highest_score))
         
         if functions.fitness(highest_score) == max_fitness:
+            functions.printBoard(highest_score)
             print("Solution found!")
             break
             
