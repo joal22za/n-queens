@@ -55,12 +55,12 @@ def printBoard(board):
     for row in range(n):
         line = ""
         for col in range(n):
-            if board[row] == col:
+            if board[col] == row:
                 line += "Q "
             else:
                 line += ". "
         print(line)
-    return False
+    print()  
 
 def fitness(board):
     n = len(board)
@@ -77,11 +77,9 @@ def select_parent(boards):
     return b
 
 def crossover(parent1, parent2):
-
     n = len(parent1)
     crossover_point = random.randint(1, n - 1)
-    
+
     child1 = parent1[:crossover_point] + parent2[crossover_point:]
-    child2 = parent2[:crossover_point] + parent1[crossover_point:]
-    
-    return child1, child2
+
+    return child1
