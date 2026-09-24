@@ -9,9 +9,16 @@ def checkConflicts(board): # count all conflicts in a board
     # "2": 3
     # "4": 1
 
-    if len(board) != len(set(board)):
-        # check duplicate count
-        conflicts += (len(board) - len(set(board))) + 1
+    columns = {}
+
+    for col in board:
+        if col not in columns:
+            columns[col] = 1
+        else:
+            columns[col] += 1
+
+    for count in columns.values():
+        conflicts += count * (count - 1) // 2
 
     # check all diagonals
     diag1 = set()  # row - col
