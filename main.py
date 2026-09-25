@@ -11,8 +11,11 @@ def fit(n, child_count = 10, mutation_prob = 0.1, generations = 100):
         for j in range(child_count):
             x = functions.select_parent(boards)
             y = functions.select_parent(boards)
-            while x == y:
+            attempt = 0
+            while x == y and attempt < 10:
                 y = functions.select_parent(boards)
+                attempt += 1
+
             child = functions.crossover(x, y)
             if mutation_prob > random.random():
                 child = functions.mutate(child)
@@ -25,7 +28,7 @@ def fit(n, child_count = 10, mutation_prob = 0.1, generations = 100):
             if functions.fitness(board) > functions.fitness(highest_score):
                 highest_score = board
         if i % 20 == 0:
-            print("Generation: ", i, "Fitness: ", functions.fitness(highest_score))
+            print("Generation: ", i, "Fitness: ", functions.fitness(highest_score), " Conflicts: ", functions.checkConflicts(highest_score))
         
         if functions.fitness(highest_score) == max_fitness:
             functions.printBoard(highest_score)
@@ -37,7 +40,7 @@ def fit(n, child_count = 10, mutation_prob = 0.1, generations = 100):
 startTime = time.time()
 if __name__ == "__main__":
 
-    fit(8, child_count=20, mutation_prob=0.1, generations=1000)
+    fit(30, child_count=20, mutation_prob=0.1, generations=100000)
     EndTime = time.time()
 
     print("Time taken: ", EndTime - startTime, " seconds")

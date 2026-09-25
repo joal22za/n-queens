@@ -67,12 +67,17 @@ def fitness(board):
     max_conflicts = n * (n - 1) // 2
     return max_conflicts - checkConflicts(board)
 
+# 3 tournament selection
 def select_parent(boards):
-    a = random.choice(boards)
-    b = random.choice(boards)
     
-    if(fitness(a) > fitness(b)):
-        return a
+    candidates = random.sample(boards, 3)
+    b = candidates[0]
+
+    if fitness(candidates[1]) > fitness(b):
+        b = candidates[1]
+
+    if fitness(candidates[2]) > fitness(b):
+        b = candidates[2]
 
     return b
 
