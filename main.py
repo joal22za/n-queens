@@ -54,6 +54,7 @@ def paramter_tuning(parameter_grid):
     
 startTime = time.time()
 if __name__ == "__main__":
+<<<<<<< Updated upstream
 
     fit(30, child_count=20, mutation_prob=0.1, generations=100000)
     EndTime = time.time()
