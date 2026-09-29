@@ -54,7 +54,6 @@ def paramter_tuning(parameter_grid):
     
 startTime = time.time()
 if __name__ == "__main__":
-<<<<<<< Updated upstream
 
     x = 1
     while True:
