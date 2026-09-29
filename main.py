@@ -1,20 +1,9 @@
 import functions
 import random
-<<<<<<< Updated upstream
 import time
-=======
-import matplotlib.pyplot as plt
->>>>>>> Stashed changes
-
-parameter_grid = {
-    "mutation_prob": [0.1, 0.2, 0.3, 0.4, 0.5],
-    "child_count": [10, 20, 30, 40, 50],
-    "n": [4, 8, 16, 32],
-    "generations": [100, 200, 300, 400, 500]
-}
-
 
 def fit(n, child_count = 10, mutation_prob = 0.1, generations = 1000):
+    start_time = time.time()
     boards = [functions.generateBoard(n) for _ in range(child_count)]
     max_fitness = n * (n - 1) // 2
     
@@ -46,40 +35,17 @@ def fit(n, child_count = 10, mutation_prob = 0.1, generations = 1000):
             functions.printBoard(highest_score)
             print("Solution found! in generation: ", i)
             break
-        
 
 def paramter_tuning(parameter_grid):
-    
-    
-    
-startTime = time.time()
+
 if __name__ == "__main__":
-
-    x = 1
-    while True:
-        fit(x, child_count=20, mutation_prob=0.1, generations=100000)
-        x+=1
-        if x > 30:
-            break
+    for n in [4, 8, 12, 16]:
+        print(f"Testing n = {n}...")
+        results = [run_experiment(n) for _ in range(5)] # Kör 5 gånger per n för medelvärde
         
-    for i in range(1, 31):
-        for j in range(10000, 20000, 5000):
-            fit(i, child_count=20, mutation_prob=0.1, generations=j)
-
+        successful_runs = [r for r in results if r["success"]]
+        success_rate = (len(successful_runs) / len(results)) * 100
+        avg_gen = sum(r["generations"] for r in successful_runs) / len(successful_runs) if successful_runs else "N/A"
+        avg_time = sum(r["time"] for r in successful_runs) / len(successful_runs) if successful_runs else "N/A"
         
-        
-        
-        
-        
-        
-        
-        
-    fit(30, child_count=20, mutation_prob=0.1, generations=100000)
-    EndTime = time.time()
-
-    print("Time taken: ", EndTime - startTime, " seconds")
-=======
-    fit(8, child_count=20, mutation_prob=0.1, generations=100)
-    
-    
->>>>>>> Stashed changes
+        print(f"Result for n={n}: Success Rate: {success_rate}%, Avg Generations: {avg_gen}, Avg Time: {avg_time:.4f}s\n")
