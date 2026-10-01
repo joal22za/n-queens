@@ -175,11 +175,9 @@ if __name__ == "__main__":
         gen_mut = sum(r["generations"] for r in succ_mut) / len(succ_mut) if succ_mut else "N/A"
         time_mut = sum(r["time"] for r in succ_mut) / len(succ_mut) if succ_mut else "N/A"
         
-        print(f"  [Mutation-only] Success: {rate_mut}%, Gen: {gen_mut}, Time: {time_mut if isinstance(time_mut, str) else f'{time_mut:.4f}s'}\n")
-        
-        print(f"=== Testing n = {n} with Adaptive Mutation ===")
-        
-        # Kör den adaptiva strategin 5 gånger för att få ett medelvärde
+        print(f"  [Mutation-only] Success: {rate_mut}%, Gen: {gen_mut}, Time: {time_mut if isinstance(time_mut, str) else f'{time_mut:.4f}s'}")
+            
+        # 3. Adaptive mutation (förbättrad variant)
         results = [fit_adaptive_mutation(n, child_count=20, generations=3000) for _ in range(5)]
         
         successful_runs = [r for r in results if r["success"]]
@@ -187,4 +185,4 @@ if __name__ == "__main__":
         avg_gen = sum(r["generations"] for r in successful_runs) / len(successful_runs) if successful_runs else "N/A"
         avg_time = sum(r["time"] for r in successful_runs) / len(successful_runs) if successful_runs else "N/A"
         
-        print(f"Result for n={n}: Success Rate: {success_rate}%, Avg Generations: {avg_gen}, Avg Time: {avg_time if isinstance(avg_time, str) else f'{avg_time:.4f}s'}\n")
+        print(f"  [Adaptive-mutation] Success: {success_rate}%, Gen: {avg_gen}, Time: {avg_time if isinstance(avg_time, str) else f'{avg_time:.4f}s'}\n")
