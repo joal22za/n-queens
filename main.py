@@ -101,26 +101,34 @@ def get_conflicting_columns(board):
                 conflicting_cols.add(j)
     return list(conflicting_cols)
 
-def fit_adaptive_mutation(n, child_count=20, generations=3000):
+def adaptive_target_probability(initial_conflicts, current_conflicts):
+    if initial_conflicts == 0:
+        return 1.0
+    return max(0.0, min(1.0, 1.0 - current_conflicts / initial_conflicts)) # probability of mutation based on conflicts, increases as conflicts decrease
+
+
+def fit_adaptive_mutation(n, child_count=20, generations=3000, elite_count=1):
+    if child_count < 3:
+        print("Tournament selection requires at least three boards")
+        return 1
+    if not 1 <= elite_count < child_count:
+        print("must preserve at least one board and leave room for offspring")
+        return 1
+
     start_time = time.time()
     boards = [functions.generateBoard(n) for _ in range(child_count)]
     max_fitness = n * (n - 1) // 2
+    initial_best = max(boards, key=functions.fitness)
+    initial_conflicts = max_fitness - functions.fitness(initial_best)
     
     for i in range(generations):
-        if i < 100:
-            conflict_prob = 0.0
-        elif i < 500:
-            conflict_prob = 0.2
-        elif i < 1500:
-            conflict_prob = 0.5
-        elif i < 2500:
-            conflict_prob = 0.8
-        else:
-            conflict_prob = 1.0
+        ranked_boards = sorted(boards, key=functions.fitness, reverse=True) # bästa brädan först på listan
+        current_conflicts = max_fitness - functions.fitness(ranked_boards[0]) 
+        conflict_prob = adaptive_target_probability(initial_conflicts, current_conflicts) #gör så att fokuserade mutationer sker mer mot slutet.
             
-        new_boards = []
-        for _ in range(child_count):
-            parent = functions.select_parent(boards)
+        new_boards = [list(board) for board in ranked_boards[:elite_count]]
+        for offspring_index in range(child_count - elite_count):
+            parent = ranked_boards[0] if offspring_index == 0 else functions.select_parent(boards)
             child = list(parent)
             
             if conflict_prob > 0 and random.random() < conflict_prob:
