@@ -23,20 +23,24 @@ def checkConflicts(board): # count all conflicts in a board
         conflicts += count * (count - 1) // 2
 
     # check all diagonals
-    diag1 = set()  # row - col
-    diag2 = set()  # row + col
+    diag1 = {}  # row - col
+    diag2 = {}  # row + col
 
     for row, col in enumerate(board):
         if row - col in diag1: # checks the diagonal from top-left to bottom-right
-            conflicts += 1
+            diag1[row - col] += 1
         else:
-            diag1.add(row - col)
-
+            diag1[row - col] = 1
         if row + col in diag2: # check the diagonal from top-right to bottomleft
-            conflicts += 1
+            diag2[row + col] += 1
         else:
-            diag2.add(row + col)
+            diag2[row + col] = 1
+            
+    for count in diag1.values():
+        conflicts += count * (count - 1) // 2
 
+    for count in diag2.values():
+        conflicts += count * (count - 1) // 2
 
     return conflicts
 
