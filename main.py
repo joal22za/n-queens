@@ -1,3 +1,5 @@
+# Alexander Johansson
+
 import functions
 import random
 import time
