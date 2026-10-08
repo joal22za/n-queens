@@ -1,4 +1,4 @@
-# Alexander Johansson, Matti Al hanota, Abdihakim Mahamed, Hamed Sarvari
+# Alexander Johansson, Matti Al hanota, Abdihakim Mahamed, Hamed Sarvari, Elias Dovkrans
 
 import functions
 
