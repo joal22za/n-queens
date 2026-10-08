@@ -1,4 +1,4 @@
-# Alexander Johansson, Matti Al hanota, Abdihakim Mahamed
+# Alexander Johansson, Matti Al hanota, Abdihakim Mahamed, Hamed Sarvari
 
 import functions
 import random
