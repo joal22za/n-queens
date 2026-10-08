@@ -1,4 +1,4 @@
-# Alexander Johansson
+# Alexander Johansson, Matti Al hanota
 
 import functions
 import random
