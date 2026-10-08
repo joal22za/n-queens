@@ -1,37 +1,29 @@
 import random 
 
-def checkConflicts(board): # count all conflicts in a board
+def checkConflicts(board):
     n = len(board)
     conflicts = 0
     
-    # check duplicates numbers in board
-    #  2 3 4 2 2
-
-    # "3": 1
-    # "2": 3
-    # "4": 1
-
-    columns = {}
-
-    for col in board:
-        if col not in columns:
-            columns[col] = 1
+    rows = {}
+    for row_val in board:
+        if row_val not in rows:
+            rows[row_val] = 1
         else:
-            columns[col] += 1
+            rows[row_val] += 1
 
-    for count in columns.values():
+    for count in rows.values():
         conflicts += count * (count - 1) // 2
 
-    # check all diagonals
-    diag1 = {}  # row - col
-    diag2 = {}  # row + col
+    diag1 = {} 
+    diag2 = {} 
 
     for row, col in enumerate(board):
-        if row - col in diag1: # checks the diagonal from top-left to bottom-right
+        if row - col in diag1:
             diag1[row - col] += 1
         else:
             diag1[row - col] = 1
-        if row + col in diag2: # check the diagonal from top-right to bottomleft
+            
+        if row + col in diag2:
             diag2[row + col] += 1
         else:
             diag2[row + col] = 1
